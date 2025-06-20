@@ -4,24 +4,39 @@ from typing import Final
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes, ApplicationBuilder
 from dotenv import load_dotenv
+import threading
+from http.server import HTTPServer, BaseHTTPRequestHandler
 
 load_dotenv()
 
 TOKEN: Final = os.getenv("TOKEN")
 BOT_USERNAME: Final = os.getenv("BOT_USERNAME")
+PORT = int(os.environ.get('PORT', 10000))
 
 with open('fields.json', 'r', encoding='utf-8') as file:
     data = json.load(file)
 
 
-# Commands
+# Simple HTTP handler to keep Render happy
+class SimpleHandler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.send_header('Content-type', 'text/html')
+        self.end_headers()
+        self.wfile.write(b'Bot is running!')
+
+    def log_message(self, format, *args):
+        # Suppress HTTP server logs
+        return
+
+
+# Commands (same as before)
 async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     keyboard = []
     for field in data["fields"]:
         keyboard.append([InlineKeyboardButton(field["name"], callback_data=f"field_{field['name']}")])
     reply_markup = InlineKeyboardMarkup(keyboard)
 
-    # Handle both direct command and callback query
     if update.message:
         await update.message.reply_text("اختر مجالاً:", reply_markup=reply_markup)
     elif update.callback_query:
@@ -34,12 +49,10 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 
     callback_data = query.data
 
-    # Handle back to main menu
     if callback_data == "back_to_main":
         await start_command(update, context)
         return
 
-    # Handle field selection
     if callback_data.startswith("field_"):
         field_name = callback_data.replace("field_", "")
         selected_field = next((field for field in data['fields'] if field['name'] == field_name), None)
@@ -56,7 +69,6 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
             await query.edit_message_text(f"اختر ما تريد معرفته عن {field_name}:", reply_markup=reply_markup)
         return
 
-    # Handle back to field menu
     if callback_data.startswith("back_to_"):
         field_name = callback_data.replace("back_to_", "")
         keyboard = [
@@ -70,7 +82,6 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         await query.edit_message_text(f"اختر ما تريد معرفته عن {field_name}:", reply_markup=reply_markup)
         return
 
-    # Handle field details
     if "_" in callback_data:
         action, field_name = callback_data.split("_", 1)
         selected_field = next((field for field in data["fields"] if field["name"] == field_name), None)
@@ -96,7 +107,6 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
             try:
                 await query.edit_message_text(text, reply_markup=reply_markup, parse_mode="Markdown")
             except Exception as e:
-                # Fallback if markdown parsing fails
                 await query.edit_message_text(text, reply_markup=reply_markup)
 
 
@@ -108,27 +118,35 @@ async def post_init(app: Application) -> None:
     print("Bot is running!")
 
 
-def main() -> None:
+def run_bot():
     app = ApplicationBuilder() \
         .token(TOKEN) \
         .post_init(post_init) \
         .build()
 
-    # Commands
     app.add_handler(CommandHandler("start", start_command))
-    # Single callback handler for all button interactions
     app.add_handler(CallbackQueryHandler(button_handler))
-
-    # Error handler
     app.add_error_handler(error)
 
     try:
-        print("Polling...")
-        app.run_polling(allowed_updates=Update.ALL_TYPES, close_loop=False)
+        print("Bot polling started...")
+        app.run_polling()
+    except KeyboardInterrupt:
         print("Bot stopped by user")
     finally:
         print("Cleaning up...")
 
 
+def run_http_server():
+    server = HTTPServer(('0.0.0.0', PORT), SimpleHandler)
+    print(f"HTTP server running on port {PORT}")
+    server.serve_forever()
+
+
 if __name__ == '__main__':
-    main()
+    # Start HTTP server in a separate thread to satisfy Render
+    http_thread = threading.Thread(target=run_http_server, daemon=True)
+    http_thread.start()
+
+    # Run the bot
+    run_bot()

@@ -1,0 +1,97 @@
+{
+  "fields": [
+    {
+      "name": "البرمجة (Programming)",
+      "description": "البرمجة هي لغة العصر الحديث، تُستخدم في تطوير التطبيقات، المواقع، الألعاب، والذكاء الاصطناعي.",
+      "popular_tools": ["Python", "JavaScript", "Java", "C#"],
+      "free_resources": [
+        {"name": "Codecademy", "url": "https://www.codecademy.com/"},
+        {"name": "freeCodeCamp", "url": "https://www.freecodecamp.org/"},
+        {"name": "CS50 من هارفارد", "url": "https://cs50.harvard.edu/"}
+      ],
+      "roadmap": [
+        "اختر مجالًا: (ويب، ذكاء اصطناعي، ألعاب).",
+        "تعلّم الأساسيات: متغيرات، حلقات، دوال.",
+        "تخصّص: تعلم إطارات عمل مثل React أو Django.",
+        "أنشئ مشاريع: GitHub هو مكانك لعرض أعمالك.",
+        "تقدم للوظائف: ابدأ بـ Freelance أو وظيفة مبتدئ."
+      ]
+    },
+    {
+      "name": "تصميم الجرافيك (Graphic Design)",
+      "description": "التصميم الجرافيكي يجمع بين الإبداع والتكنولوجيا لإنشاء صور ومعالجة الصور.",
+      "popular_tools": ["Adobe Photoshop", "Illustrator", "Canva"],
+      "free_resources": [
+        {"name": "Krita", "url": "https://krita.org/"},
+        {"name": "GIMP", "url": "https://www.gimp.org/"},
+        {"name": "Canva Design School", "url": "https://www.canva.com/learn/"}
+      ],
+      "roadmap": [
+        "تعلم الأساسيات: نظرية الألوان، الطبقات.",
+        "تدرب على الأدوات: ابدأ بـ Canva ثم انتقل لـ Photoshop.",
+        "أنشئ بورتفوليو: استخدم Behance أو Dribbble.",
+        "اختر تخصصًا: (هوية بصرية، إعلانات)."
+      ]
+    },
+    {
+      "name": "المونتاج (Video Editing)",
+      "description": "المونتاج هو عملية تجميع المقاطع وإضافة تأثيرات لإنشاء فيديو احترافي.",
+      "popular_tools": ["Adobe Premiere Pro", "DaVinci Resolve", "Final Cut Pro"],
+      "free_resources": [
+        {"name": "DaVinci Resolve", "url": "https://www.blackmagicdesign.com/products/davinciresolve/"},
+        {"name": "Blender", "url": "https://www.blender.org/"}
+      ],
+      "roadmap": [
+        "تعلم القص الأساسي: Cutting, Transitions.",
+        "أضف مؤثرات: Color Grading, Text.",
+        "أنشئ مشاريع: مونتاج فيديوهات قصيرة.",
+        "انشر على YouTube أو Vimeo."
+      ]
+    },
+    {
+      "name": "التسويق (Marketing)",
+      "description": "التسويق الرقمي يشمل SEO، الإعلانات المدفوعة، وسائل التواصل الاجتماعي.",
+      "popular_tools": ["Google Analytics", "Copywriting"],
+      "free_resources": [
+        {"name": "Google Digital Garage", "url": "https://learndigital.withgoogle.com/digitalgarage/"},
+        {"name": "HubSpot Academy", "url": "https://academy.hubspot.com/"}
+      ],
+      "roadmap": [
+        "تعلم أساسيات التسويق: (الـ 4Ps).",
+        "اختر تخصصًا: (Social Media, SEO).",
+        "طبق على مشاريع حقيقية: متطوع أو Freelance."
+      ]
+    },
+    {
+      "name": "الأداء الصوتي (Voice Over)",
+      "description": "الأداء الصوتي يتطلب نطقًا واضحًا وقدرة على التحكم في الصوت.",
+      "popular_tools": ["الإعلانات", "التعليق الصوتي (YouTube)"],
+      "free_resources": [
+        {"name": "Audacity", "url": "https://www.audacityteam.org/"},
+        {"name": "ACX", "url": "https://www.acx.com/"}
+      ],
+      "roadmap": [
+        "تدرب على القراءة: سجل صوتك وحلله.",
+        "استثمر في ميكروفون جيد.",
+        "أنشئ عينات صوتية (Demo).",
+        "انشر على منصات مثل Fiverr أو Upwork."
+      ]
+    },
+    {
+      "name": "كتابة المحتوى (Content Writing)",
+      "description": "كتابة المحتوى تشمل المدونات، السيناريوهات، النصوص الإعلانية.",
+      "popular_tools": ["SEO Writing", "Copywriting"],
+      "free_resources": [
+        {"name": "Grammarly", "url": "https://www.grammarly.com/"},
+        {"name": "HubSpot Blog", "url": "https://blog.hubspot.com/"}
+      ],
+      "roadmap": [
+        "اقرأ كثيرًا لتحسين أسلوبك.",
+        "تدرب على كتابة مقالات قصيرة.",
+        "أنشئ مدونة شخصية.",
+        "تقدّم للعمل على منصات Freelance."
+      ]
+    }
+  ],
+  "conclusion": "كل مجال يحتاج إلى التدريب المستمر وبناء بورتفوليو يعرض مهاراتك. ابدأ بالمجال الأكثر شغفًا لك، واستخدم الروابط المجانية المذكورة لتطوير نفسك دون تكاليف!"
+}
